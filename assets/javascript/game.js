@@ -13,24 +13,23 @@ var ansWord;
 
 function reset() {
 
-    ansWord = words[Math.floor(Math.random() * words.length)];
+    ansWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
 
     ansWordArr = [];
 
     for (var i = 0; i < ansWord.length; i++) {
         ansWordArr[i] = "_";
     }
-
     numGuessesRemaining = maxNumGuesses;
     guessedLetters = [];   
 
 };
 
-function updateDisplay() {
+function updateScreen() {
     document.getElementById("wins").innerHTML = numWins;
-    document.getElementById("numLosses").innerHTML = numLosses;
-    document.getElementById("numGuesses").innerHTML = numGuessesRemaining;
-    document.getElementById("answerWord").innerHTML = ansWordArr.join("");
+    document.getElementById("losses").innerHTML = numLosses;
+    document.getElementById("guessesRemaining").innerHTML = numGuessesRemaining;
+    document.getElementById("characterWord").innerHTML = ansWordArr.join("");
     document.getElementById("guessedLetters").innerText = guessedLetters.join("");
 };
 
@@ -71,10 +70,11 @@ function isLoser() {
 
 
 document.onkeyup = function (event) {
+
     //if isFinished is true then restart the game to the initial setup 
     //and switch isFinished back to false
     if (isFinished) {
-        setup();
+        reset();
         isFinished = false;
     } else {
         //check to see if only letters A-Z are pressed
